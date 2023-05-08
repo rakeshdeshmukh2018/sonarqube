@@ -1,0 +1,112 @@
+    1  ll
+    2  cp /tmp/pull-secret.txt .
+    3  ll
+    4  wget https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
+    5  sudo dnf install wget
+    6  wget https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
+    7  ll
+    8  tar -xvf crc-linux-amd64.tar.xz 
+    9  ll
+   10  cd crc-linux-
+   11  cd crc-linux-2.18.0-amd64/
+   12  ll
+   13  crc verion
+   14  cp crc /usr/local/bin/
+   15  sudo cp crc /usr/local/bin/
+   16  crc version
+   17  crc config set skip-check-daemon-systemd-unit true
+   18  crc config set skip-check-daemon-systemd-sockets true
+   19  cd ..
+   20  ll
+   21  crc setup
+   22  crc start -h
+   23  crc start -p pull-secret.txt -m 12000 -c 6
+   24  history 
+   25  crc start -m 12000 -c 6
+   26  eval $(crc oc-env)
+   27  oc login -u kubeadmin
+   28  oc get pv
+   29  cd /openshiftdata/
+   30  ll
+   31  cat pv1.yml 
+   32  oc apply -f pv1.yml 
+   33  oc get pv
+   34  vim sonarqube-h2-db-template.yml
+   35  ll
+   36  oc apply -f sonarqube-h2-db-template.yml 
+   37  oc get all
+   38  oc new-project sonarqube-h2-db
+   39  oc project sonarqube-h2-db
+   40  oc apply -f sonarqube-h2-db-template.yml 
+   41  oc get all
+   42  git clone https://github.com/edwin/sonarqube-on-openshift-4.git
+   43  cd sonarqube-on-openshift-4/
+   44  ll
+   45  oc create -f sonarqube-h2-db-template.yml
+   46  vim sonarqube-h2-db-template.yml 
+   47  cat sonarqube-h2-db-template.yml |grep -i v1
+   48  oc create -f sonarqube-h2-db-template.yml
+   49  kubectl api-resources | grep deployment
+   50  vim sonarqube-h2-db-template.yml 
+   51  sed -i 's/app\/v1/apps\/v1/g' sonarqube-h2-db-template.yml
+   52  cat sonarqube-h2-db-template.yml |grep -i v1
+   53  oc create -f sonarqube-h2-db-template.yml
+   54  sed -i 's/apps\/v1/apps.openshift.io\/v1/g' sonarqube-h2-db-template.yml
+   55  cat sonarqube-h2-db-template.yml |grep -i v1
+   56  vim sonarqube-h2-db-template.yml
+   57  oc create -f sonarqube-h2-db-template.yml
+   58  git clone https://github.com/BCDevOps/sonarqube.git
+   59  cd sonarqube
+   60  ll
+   61  oc apply -f sonarqube-postgresql-template.yaml 
+   62  vim sonarqube-postgresql-template.yaml
+   63  oc get sc
+   64  oc get pv
+   65  ll
+   66  cp sonarqube-postgresql-template.yaml /openshiftdata/
+   67  vim sonarqube-postgresql-template.yaml 
+   68  cat sonarqube-postgresql-template.yaml |grep v1
+   69  oc apply -f sonarqube-postgresql-template.yaml
+   70  vim sonarqube-postgresql-template.yaml 
+   71  oc apply -f sonarqube-postgresql-template.yaml
+   72  oc get all
+   73  oc get templates
+   74  oc get pvc
+   75  oc get templates
+   76  pwd
+   77  ll
+   78  oc get templates
+   79  oc new-app sonarqube --name sonarqube-pod -l app=demo
+   80  oc get all
+   81  cd ..
+   82  ll
+   83  mv sonarqube sonarqube_old
+   84  ll
+   85  git clone https://github.com/BCDevOps/sonarqube.git
+   86  cat sonarqube_old/sonarqube-postgresql-template.yaml 
+   87  less sonarqube_old/sonarqube-postgresql-template.yaml
+   88  vim sonarqube/sonarqube-postgresql-template.yaml 
+   89  pwd
+   90  cat sonarqube_old/sonarqube-postgresql-template.yaml
+   91  vim sonarqube/sonarqube-postgresql-template.yaml 
+   92  oc replace -f sonarqube/sonarqube-postgresql-template.yaml
+   93  oc get templates
+   94  oc new-app sonarqube --name sonarqube-pod -l app=demo
+   95  oc get pod
+   96  oc get pod -w
+   97  oc get pvc
+   98  oc get pv
+   99  oc get pvc
+  100  oc get pod
+  101  oc get pvc
+  102  oc get svc
+  103  oc get route
+  104  oc expose service/sonarqube-pod
+  105  oc get route
+  106  oc get pvc
+  107  oc get pvc --all-namespaces
+  108  ll
+  109  cd sonarqube
+  110  ll
+  111  pwd
+  112  history >> history.txt
